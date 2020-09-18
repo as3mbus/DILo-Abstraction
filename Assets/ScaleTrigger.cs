@@ -7,15 +7,10 @@ namespace DefaultNamespace
     {
         public float scaleModifier;
         
-        public void Interact1()
-        {
-            transform.localScale *= scaleModifier;
-        }
+        public void Interact1() 
+            => transform.localScale *= scaleModifier;
 
-        public void Interact2()
-        {
-            transform.localScale /= scaleModifier;
-        }
-
+        public void Interact2() 
+            => transform.localScale /= scaleModifier;
     }
 }

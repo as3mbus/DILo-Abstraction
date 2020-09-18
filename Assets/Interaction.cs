@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,27 +16,28 @@ namespace DefaultNamespace
 
         private void Update()
         {
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                List<Collider2D> hit = new List<Collider2D>();
-                if (Physics2D.OverlapCircle(transform.position, radius, filter, hit) > 1)
-                {
-                    hit.Remove(collider);
-                    hit.Sort((one, two) => one.Distance(collider).distance.CompareTo(two.Distance(collider).distance));
-                    hit[0].GetComponent<IInteractible1>()?.Interact1();
-                }
-            }
-            
-            if (Input.GetKeyUp(KeyCode.Tab))
-            {
-                List<Collider2D> hit = new List<Collider2D>();
-                if (Physics2D.OverlapCircle(transform.position, radius, filter, hit) > 1)
-                {
-                    hit.Remove(collider);
-                    hit.Sort((one, two) => one.Distance(collider).distance.CompareTo(two.Distance(collider).distance));
-                    hit[0].GetComponent<IInteractible2>()?.Interact2();
-                }
-            }
+            if (Input.GetKeyUp(KeyCode.Space)) SpaceInteraction();
+            if (Input.GetKeyUp(KeyCode.Tab)) TabInteraction();
+        }
+
+        private void TabInteraction()
+        {
+            List<Collider2D> nearby = GetCloseObject();
+            nearby?[0].GetComponent<IInteractible2>()?.Interact2();
+        }
+        private void SpaceInteraction()
+        {
+            List<Collider2D> nearby = GetCloseObject();
+            nearby[0].GetComponent<IInteractible1>()?.Interact1();
+        }
+        private List<Collider2D> GetCloseObject()
+        {
+            List<Collider2D> hit = new List<Collider2D>();
+            Physics2D.OverlapCircle(transform.position, radius, filter, hit);
+            if (hit.Count <= 1) return null;
+            hit.Remove(collider);
+            hit.Sort((one, two) => one.Distance(collider).distance.CompareTo(two.Distance(collider).distance));
+            return hit;
         }
     }
 }

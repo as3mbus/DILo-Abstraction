@@ -9,14 +9,10 @@ namespace DefaultNamespace.Scenes
     {
         private SpriteRenderer sprite;
 
-        private void Start()
-        {
-            sprite = GetComponent<SpriteRenderer>();
-        }
+        private void Start() 
+            => sprite = GetComponent<SpriteRenderer>();
 
-        public  void Interact1()
-        {
-            sprite.color = new Color(Random.value, Random.value, Random.value);
-        }
+        public  void Interact1() 
+            => sprite.color = new Color(Random.value, Random.value, Random.value);
     }
 }
