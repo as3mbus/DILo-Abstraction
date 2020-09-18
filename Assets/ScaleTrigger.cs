@@ -3,37 +3,19 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class ScaleTrigger: MonoBehaviour
+    public class ScaleTrigger: Trigger
     {
-        private bool triggerAble = false;
         public float scaleModifier;
-        private void Update()
-        {
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                if (triggerAble)
-                {
-                    transform.localScale = transform.localScale * scaleModifier;
-                }
-            }
-            if (Input.GetKeyUp(KeyCode.Tab))
-            {
-                if (triggerAble)
-                {
-                    transform.localScale = transform.localScale / scaleModifier;
-                }
-            }
-        }
         
-        
-        private void OnTriggerEnter2D(Collider2D other)
+        protected override void Interaction1()
         {
-            triggerAble = true;
+            transform.localScale *= scaleModifier;
         }
 
-        private void OnTriggerExit2D(Collider2D other)
+        protected override void Interaction2()
         {
-            triggerAble = false;
+            transform.localScale /= scaleModifier;
         }
+
     }
 }
