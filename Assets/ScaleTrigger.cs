@@ -3,16 +3,16 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class ScaleTrigger: Trigger
+    public class ScaleTrigger: MonoBehaviour, IInteractible1, IInteractible2
     {
         public float scaleModifier;
         
-        protected override void Interaction1()
+        public void Interact1()
         {
             transform.localScale *= scaleModifier;
         }
 
-        protected override void Interaction2()
+        public void Interact2()
         {
             transform.localScale /= scaleModifier;
         }

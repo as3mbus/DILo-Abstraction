@@ -4,7 +4,8 @@ using Random = UnityEngine.Random;
 
 namespace DefaultNamespace.Scenes
 {
-    public class ColorTrigger : Trigger
+    public class ColorTrigger : MonoBehaviour, IInteractible1
+    
     {
         private SpriteRenderer sprite;
 
@@ -13,14 +14,9 @@ namespace DefaultNamespace.Scenes
             sprite = GetComponent<SpriteRenderer>();
         }
 
-        protected override void Interaction1()
+        public  void Interact1()
         {
             sprite.color = new Color(Random.value, Random.value, Random.value);
-        }
-
-        protected override void Interaction2()
-        {
-            // do nothing
         }
     }
 }
